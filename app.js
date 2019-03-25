@@ -4,6 +4,8 @@ var fs = require('fs');
 
 var app = express();
 
+const port = process.env.PORT || 8080
+
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.set('view engine', 'hbs');
@@ -17,19 +19,19 @@ hbs.registerHelper('message', (text) => {
     return text.toUppercase()
 })
 
-app.use((request, Response, next) => {
-    // var time = new Date().toString();
-    // // console.log(`${time}: ${request.method} ${request.url}`);
-    // var log = `${time}:${request.method} ${request.url}`;
-    // fs.appendFile('server.log', log + '\n', (error) => {
-    //     if (error) {
-    //         console.log('Unable to log message')
-    //     }
-    // });
-    Response.render('use.hbs',{
-        title:'About page'
-    });
-});
+// app.use((request, Response, next) => {
+//     // var time = new Date().toString();
+//     // // console.log(`${time}: ${request.method} ${request.url}`);
+//     // var log = `${time}:${request.method} ${request.url}`;
+//     // fs.appendFile('server.log', log + '\n', (error) => {
+//     //     if (error) {
+//     //         console.log('Unable to log message')
+//     //     }
+//     // });
+//     Response.render('use.hbs',{
+//         title:'About page'
+//     });
+// });
 
 app.get('/',(Request, Response) => {
     Response.send({
@@ -53,8 +55,9 @@ app.get('/404', (request,Response) => {
     Response.send({
         error:'Page not found'
     })
+
 })
 
-app.listen(8080,()=>{
+app.listen(port,()=>{
     console.log('Server is listening')
 });
